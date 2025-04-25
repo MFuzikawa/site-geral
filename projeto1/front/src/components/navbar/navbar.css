@@ -1,0 +1,23 @@
+
+.navbar {
+    background-color: #222;
+    padding: 1rem;
+ 
+  }
+  
+  .ulbar {
+    list-style: none;
+    display: flex;
+    justify-content: right;
+    gap: 1rem;
+  }
+  
+  .ulbar li a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .ulbar li a:hover {
+    text-decoration: underline;
+  }
+  
