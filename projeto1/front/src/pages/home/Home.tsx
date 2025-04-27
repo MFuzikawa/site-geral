@@ -8,9 +8,9 @@ function Home() {
         <>
         <div className="conteiner">
             <div className="box-home">
-                <h1>Clique e veja </h1>
-                <Button />
+                <h1>Bem vindo  </h1>
             </div>
+            <Button />
         </div>
         </>
     )
