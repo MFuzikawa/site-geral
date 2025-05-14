@@ -30,7 +30,7 @@ exports.getTodos = getTodos;
 // Criar uma nova tarefa
 const createTodo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { text, duedate } = req.body;
+        const { title, duedate } = req.body;
         const newTodo = new todo_1.default({ text, duedate });
         const savedTodo = yield newTodo.save();
         res.json(savedTodo);
@@ -44,8 +44,8 @@ exports.createTodo = createTodo;
 // Atualizar uma tarefa (editar texto ou marcar como concluída)
 const updateTodo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { text, completed } = req.body;
-        const updatedTodo = yield todo_1.default.findByIdAndUpdate(req.params.id, Object.assign(Object.assign({}, (text !== undefined && { text })), (completed !== undefined && { completed })), { new: true });
+        const { title, completed } = req.body;
+        const updatedTodo = yield todo_1.default.findByIdAndUpdate(req.params.id, Object.assign(Object.assign({}, (title !== undefined && { title })), (completed !== undefined && { completed })), { new: true });
         if (!updatedTodo) {
             return res.status(404).json({ error: 'Tarefa não encontrada' });
         }

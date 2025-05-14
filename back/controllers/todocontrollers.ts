@@ -23,9 +23,11 @@ export const createTodo: RequestHandler = async (
     const newTodo = new Todo({ title, duedate });
     const savedTodo = await newTodo.save();
     res.json(savedTodo);
+    console.log("Corpo da requisição recebido no backend:", req.body);
   } catch (error) {
     console.error('Erro ao salvar tarefa:', error);
     res.status(500).json({ error: 'Erro interno ao salvar tarefa' });
+    
   }
 };
 
