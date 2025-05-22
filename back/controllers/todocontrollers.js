@@ -1,5 +1,4 @@
 "use strict";
-// src/controllers/todoController.ts
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -15,8 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteTodo = exports.updateTodo = exports.createTodo = exports.getTodos = void 0;
 const todo_1 = __importDefault(require("../models/todo"));
-// Buscar todas tarefas
-const getTodos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getTodos = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const todos = yield todo_1.default.find();
         res.json(todos);
@@ -27,13 +25,13 @@ const getTodos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.getTodos = getTodos;
-// Criar uma nova tarefa
-const createTodo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const createTodo = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { title, duedate } = req.body;
-        const newTodo = new todo_1.default({ text, duedate });
+        const newTodo = new todo_1.default({ title, duedate });
         const savedTodo = yield newTodo.save();
         res.json(savedTodo);
+        console.log("Corpo da requisição recebido no backend:", req.body);
     }
     catch (error) {
         console.error('Erro ao salvar tarefa:', error);
@@ -41,8 +39,7 @@ const createTodo = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.createTodo = createTodo;
-// Atualizar uma tarefa (editar texto ou marcar como concluída)
-const updateTodo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const updateTodo = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { title, completed } = req.body;
         const updatedTodo = yield todo_1.default.findByIdAndUpdate(req.params.id, Object.assign(Object.assign({}, (title !== undefined && { title })), (completed !== undefined && { completed })), { new: true });
@@ -57,8 +54,7 @@ const updateTodo = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.updateTodo = updateTodo;
-// Deletar uma tarefa
-const deleteTodo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const deleteTodo = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const deletedTodo = yield todo_1.default.findByIdAndDelete(req.params.id);
         if (!deletedTodo) {

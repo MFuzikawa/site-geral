@@ -6,7 +6,7 @@ function Button() {
     const addState = ()=> {setState(State + 1)}
     return(
         <>
-        <button onClick={addState}> você clicou {State} vezes</button>
+        <button id="button-change-number" onClick={addState}> você clicou {State} vezes</button>
         </>
     )
 }

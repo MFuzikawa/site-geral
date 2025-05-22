@@ -18,8 +18,9 @@ if (!process.env.MONGO_URI) {
 }
 mongoose_1.default.connect(process.env.MONGO_URI)
     .then(() => {
+    var _a;
     console.log("Conectado ao MongoDB");
-    const port = process.env.PORT || 5000;
+    const port = (_a = process.env.PORT) !== null && _a !== void 0 ? _a : 5000;
     app.listen(port, () => {
         console.log(`Servidor rodando na porta ${port}`);
     });

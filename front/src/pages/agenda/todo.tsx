@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import './todo.css'
+import { IoIosAdd } from "react-icons/io";
 
 
 interface Todo {
@@ -18,7 +20,7 @@ const App = () => {
   const fetchTodos = async () => {
     try {
       const response = await axios.get("http://localhost:5000/api/todos");
-      setTodos(response.data); 
+      setTodos(response.data);
     } catch (error) {
       console.error("Erro ao buscar tarefas:", error);
     }
@@ -70,36 +72,40 @@ const App = () => {
 
   return (
     <div>
-      <h1>Agenda de Tarefas</h1>
+
 
       {/* Formulário para adicionar tarefa */}
-      <div>
-        <input
-          type="text"
-          placeholder="Nova tarefa"
-          value={newTodo}
-          onChange={(e) => setNewTodo(e.target.value)}
-        />
-        <input
-          type="date"
-          value={duedate}
-          onChange={(e) => setDuedate(e.target.value)}
-        />
-        <button onClick={addTodo}>Adicionar Tarefa</button>
+      <div className="container">
+        <div className="box-tarefas">
+          <h1>to-do list</h1>
+          <div className="inputs">
+            <input
+              type="text"
+              placeholder="Nova tarefa"
+              value={newTodo}
+              onChange={(e) => setNewTodo(e.target.value)}
+            />
+            <input
+              type="date"
+              value={duedate}
+              onChange={(e) => setDuedate(e.target.value)}
+            />
+            <button id="button-addtodo" onClick={addTodo}><IoIosAdd size={30} /> </button>
+          </div>
+          {/* Lista de tarefas */}
+          <ul>
+            {todos.map((todo) => (
+              <li key={todo._id}>
+                <span>{todo.title} - {todo.duedate}</span>
+                <button onClick={() => updateTodo(todo._id, todo.completed)}>
+                  {todo.completed ? "Desmarcar" : "Marcar como Concluída"}
+                </button>
+                <button onClick={() => deleteTodo(todo._id)}>Deletar</button>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-
-      {/* Lista de tarefas */}
-      <ul>
-        {todos.map((todo) => (
-          <li key={todo._id}>
-            <span>{todo.title} - {todo.duedate}</span>
-            <button onClick={() => updateTodo(todo._id, todo.completed)}>
-              {todo.completed ? "Desmarcar" : "Marcar como Concluída"}
-            </button>
-            <button onClick={() => deleteTodo(todo._id)}>Deletar</button>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 };
