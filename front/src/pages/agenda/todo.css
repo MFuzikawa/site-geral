@@ -37,3 +37,7 @@ input{
     border: none;
     border-radius: 50%;
 }
+#button-addtodo:hover{
+    background-color: rgb(85, 150, 85);
+    cursor: pointer;
+}

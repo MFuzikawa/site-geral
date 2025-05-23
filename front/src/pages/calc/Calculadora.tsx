@@ -68,7 +68,7 @@ function Calc() {
                     <h1>Calculadora basica</h1>
                     <div className="inputs-calc">
 
-                        <input type="number" value={number} onChange={changeNumber} />
+                        <input type="number" value={number} onChange={changeNumber} placeholder="Numero 1" />
 
                         <select name="operações" id="operações" value={operacoes} onChange={(e) => setOperacoes(e.target.value)}>
                             <option value="">selecione</option>
@@ -77,7 +77,7 @@ function Calc() {
                             <option value="multi">*</option>
                             <option value="div">/</option>
                         </select>
-                        <input type="number" value={number2} onChange={changeNumber2} />
+                        <input type="number" value={number2} onChange={changeNumber2} placeholder="Numero 2" />
                     </div>
 
                     <div className="result-calc">
