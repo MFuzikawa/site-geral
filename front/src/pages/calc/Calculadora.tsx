@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./calculadora.css"
 import calculateResult from "../../components/CalcComponents/recebenumseop";
 import InputControls from "../../components/CalcComponents/inputsCalc";
 import Historic from "../../components/CalcComponents/historicCalc";
+import Button from "../../components/button/button";
 
 function Calc() {
     const [number1, setNumber1] = useState<string>("")
@@ -53,7 +54,10 @@ function Calc() {
                         />
 
                     <div className="result-calc">
-                        <button id="button-calc" onClick={calcular}>calcular</button>
+                        <Button id="button-calc"
+                        click={calcular} children="Calcular"
+                        />
+                        
                     </div>
                     <Historic historic={historic} />
                 </div>

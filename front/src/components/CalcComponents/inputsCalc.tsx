@@ -1,13 +1,13 @@
-// Em InputControls.tsx (ou inputCalc.tsx)
-import React from "react"; // Importe React se estiver usando React.ChangeEvent
+
+import "../../pages/calc/calculadora.css"
 
 interface InputControlsProps {
-  currentNumber1: string;
-  onNumber1Change: (value: string) => void; // Ou React.ChangeEvent<HTMLInputElement>
-  currentNumber2: string;
-  onNumber2Change: (value: string) => void; // Ou React.ChangeEvent<HTMLInputElement>
-  currentOperation: string;
-  onOperationChange: (value: string) => void; // Ou React.ChangeEvent<HTMLSelectElement>
+  readonly currentNumber1: string;
+  readonly onNumber1Change: (value: string) => void; // Ou React.ChangeEvent<HTMLInputElement>
+  readonly currentNumber2: string;
+  readonly onNumber2Change: (value: string) => void; // Ou React.ChangeEvent<HTMLInputElement>
+  readonly currentOperation: string;
+  readonly onOperationChange: (value: string) => void; // Ou React.ChangeEvent<HTMLSelectElement>
 }
 
 function InputControls({

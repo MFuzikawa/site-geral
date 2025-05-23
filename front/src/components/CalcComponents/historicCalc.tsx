@@ -1,6 +1,7 @@
+import "../../pages/calc/calculadora.css"
 
 interface HistoricProps {
-    historic: string[]
+    readonly historic: string[]
 }
 
 function Historic({ historic }: HistoricProps) {
@@ -9,7 +10,7 @@ function Historic({ historic }: HistoricProps) {
         <div className="historic-calc">
 
             <ul>{historic.map((item, index) => (
-                <li key={index}> {item} </li>
+                <li key={index} id="lista-historico-calc"> {item} </li>
             ))}
             </ul>
 

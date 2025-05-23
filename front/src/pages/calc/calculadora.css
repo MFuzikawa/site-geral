@@ -1,3 +1,7 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 main{
     background-color: rgb(255, 255, 255);
     height: 92.8vh;
@@ -14,7 +18,13 @@ main{
     overflow: hidden;
     
 }
+.calculadora h1{
+padding: 50px;
+}
+
 input{
+    border-radius: 3px;
+    border: solid 1px;
     text-align: center;
 }
 #operações{
@@ -24,7 +34,7 @@ input{
     height: 30px;
     width: 60px;
     margin-top: 10px;
-    background-color: green;
+    background-color: #2ecc71;
     border: none;
     border-radius: 4px;
 }

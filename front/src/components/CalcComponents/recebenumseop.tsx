@@ -1,3 +1,5 @@
+import "../../pages/calc/calculadora.css"
+
 interface Calc{
     number1:number;
     number2:number;
