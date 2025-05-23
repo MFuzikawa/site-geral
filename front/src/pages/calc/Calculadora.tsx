@@ -1,57 +1,34 @@
 import React, { useState } from "react";
 import "./calculadora.css"
+import calculateResult from "../../components/CalcComponents/recebenumseop";
+import InputControls from "../../components/CalcComponents/inputsCalc";
+import Historic from "../../components/CalcComponents/historicCalc";
 
 function Calc() {
-    const [number, setNumber] = useState<string>("")
+    const [number1, setNumber1] = useState<string>("")
     const [number2, setNumber2] = useState<string>("")
-    const [operacoes, setOperacoes] = useState<string>('')
-    const [historico, setHistorico] = useState<string[]>([])
+    const [operation, setOperation] = useState<string>('')
+    const [historic, setHistoric] = useState<string[]>([])
 
 
-    const changeNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setNumber(e.target.value)
-    }
-    const changeNumber2 = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setNumber2(e.target.value)
-    }
 
     const calcular = () => {
-        const n1 = Number(number);
+        const n1 = Number(number1);
         const n2 = Number(number2)
-        let res: number | string = 0
 
+        const res = calculateResult({number1:n1, number2:n2, operation:operation})
+        
         const simbols = {
             som: "+",
             sub: "-",
             multi: "*",
             div: "/",
-        }[operacoes]
-
-        switch (operacoes) {
-            case "som":
-                res = n1 + n2
-                break
-
-            case "sub":
-                res = n1 - n2
-                break;
-
-            case "multi":
-                res = n1 * n2;
-                break;
-
-            case "div":
-                res = n1 / n2;
-                break;
-
-        }
+        }[operation]
 
 
-
-
-        setHistorico((prev) => [
+        setHistoric((prev) => [
             ...prev,
-            `${number} ${simbols} ${number2} = ${res}`
+            `${number1} ${simbols} ${number2} = ${res}`
         ])
 
     }
@@ -65,32 +42,20 @@ function Calc() {
         <div>
             <main>
                 <div className="calculadora">
-                    <h1>Calculadora basica</h1>
-                    <div className="inputs-calc">
-
-                        <input type="number" value={number} onChange={changeNumber} placeholder="Numero 1" />
-
-                        <select name="operações" id="operações" value={operacoes} onChange={(e) => setOperacoes(e.target.value)}>
-                            <option value="">selecione</option>
-                            <option value="som">+</option>
-                            <option value="sub">-</option>
-                            <option value="multi">*</option>
-                            <option value="div">/</option>
-                        </select>
-                        <input type="number" value={number2} onChange={changeNumber2} placeholder="Numero 2" />
-                    </div>
+                    <h1>CALCULADORA BASICA</h1>
+                        <InputControls 
+                            currentNumber1={number1}
+                            onNumber1Change={setNumber1}
+                            currentNumber2={number2}
+                            onNumber2Change={setNumber2}
+                            currentOperation={operation}
+                            onOperationChange={setOperation}
+                        />
 
                     <div className="result-calc">
                         <button id="button-calc" onClick={calcular}>calcular</button>
                     </div>
-                    <div className="historic-calc">
-
-                        <ul>{historico.map((item, index) => (
-                            <li key={index}> {item} </li>
-                        ))}
-                        </ul>
-
-                    </div>
+                    <Historic historic={historic} />
                 </div>
             </main>
         </div>

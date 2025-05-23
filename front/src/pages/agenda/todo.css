@@ -1,43 +1,199 @@
-.container{
-    height: 100vh;
-    background-color: rgb(117, 117, 199);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.box-tarefas{
-    box-sizing: border-box;
+
+  
+  .container {
+    width: 100%;
+    max-width: 600px; /* Aumentado para melhor espaçamento */
+    margin: 20px auto; /* Adiciona margem no topo e na base */
+  }
+  
+  .box-tarefas {
+    background-color: #ffffff;
+    padding: 25px; /* Aumentado o padding */
+    border-radius: 12px; /* Bordas mais arredondadas */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Sombra mais pronunciada */
     text-align: center;
-    padding: 1%;
-    border-radius: 3px;
-    height: 400px;
-    background-color: cadetblue;
+  }
+  
+  .box-tarefas h1 {
+    color: #2c3e50; /* Cor mais escura e profissional */
+    margin-bottom: 25px; /* Aumentada a margem inferior */
+    font-size: 2.5em; /* Tamanho do título aumentado */
+    font-weight: 600; /* Peso da fonte */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .inputs {
     display: flex;
-    flex-direction: column;
-}
-.inputs{
-    width: 500px;
-    padding: 5px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-
-}
-input{
+    gap: 10px; /* Espaçamento entre os inputs e botão */
+    margin-bottom: 25px; /* Aumentada a margem inferior */
+    align-items: center; /* Alinha verticalmente os itens */
+  }
+  
+  .inputs input[type="text"],
+  .inputs input[type="date"] {
+    flex-grow: 1; /* Permite que os inputs cresçam para preencher o espaço */
+    padding: 12px 15px; /* Padding aumentado */
+    border: 1px solid #d1d9e6; /* Borda mais suave */
+    border-radius: 8px; /* Bordas arredondadas */
+    font-size: 1em;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .inputs input[type="text"]:focus,
+  .inputs input[type="date"]:focus {
+    border-color: #3498db; /* Cor da borda ao focar */
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.2); /* Sombra ao focar */
+    outline: none;
+  }
+  
+  #button-addtodo {
+    background-color: #2ecc71; /* Verde mais vibrante */
+    color: white;
     border: none;
-    border-radius: 3px;
-    margin: 4px;
-
-}
-
-#button-addtodo{
-    height: 40px;
-    width: 40px;
-    background-color: green;
-    border: none;
-    border-radius: 50%;
-}
-#button-addtodo:hover{
-    background-color: rgb(85, 150, 85);
+    padding: 10px; /* Ajustado para alinhar com altura dos inputs */
+    border-radius: 8px;
     cursor: pointer;
-}
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 50px; /* Largura mínima para o botão */
+  }
+  
+  #button-addtodo:hover {
+    background-color: #27ae60; /* Verde mais escuro no hover */
+  }
+  
+  #ul-todo {
+    list-style-type: none;
+    padding: 0;
+    margin: 0; /* Remove margem padrão da lista */
+  }
+  
+  #lista-todo {
+    background-color: #f8f9fa; /* Fundo do item da lista mais claro */
+    padding: 15px; /* Padding aumentado */
+    margin-bottom: 12px; /* Espaçamento entre itens aumentado */
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease;
+    border-left: 5px solid #3498db; /* Borda lateral para destaque */
+  }
+  
+  #lista-todo.completed {
+    background-color: #e9ecef; /* Fundo diferente para tarefas concluídas */
+    border-left-color: #28a745; /* Borda verde para concluídas */
+  }
+  
+  #lista-todo.completed .todo-title {
+    text-decoration: line-through;
+    color: #6c757d; /* Cor do texto mais clara para concluídas */
+  }
+  
+  .todo-info {
+    display: flex;
+    flex-direction: column; /* Título e data um abaixo do outro */
+    align-items: flex-start; /* Alinha à esquerda */
+    flex-grow: 1;
+    margin-right: 10px; /* Espaço antes dos botões */
+  }
+  
+  .todo-title {
+    font-size: 1.1em;
+    font-weight: 500;
+    color: #34495e; /* Cor do título */
+  }
+  
+  .todo-duedate {
+    font-size: 0.85em;
+    color: #7f8c8d; /* Cor da data */
+    margin-top: 4px; /* Pequeno espaço entre título e data */
+  }
+  
+  
+  .todo-actions button {
+    padding: 8px 12px; /* Padding dos botões de ação */
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-left: 8px; /* Espaçamento entre botões de ação */
+  }
+  
+  .todo-actions button:hover {
+      transform: translateY(-1px); /* Efeito de leve elevação */
+  }
+  
+  .button-update {
+    background-color: #3498db; /* Azul */
+    color: white;
+  }
+  
+  .button-update:hover {
+    background-color: #2980b9;
+  }
+  
+  .button-delete {
+    background-color: #e74c3c; /* Vermelho */
+    color: white;
+  }
+  
+  .button-delete:hover {
+    background-color: #c0392b;
+  }
+  
+  .empty-message {
+      color: #7f8c8d;
+      font-style: italic;
+      margin-top: 20px;
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .box-tarefas h1 {
+      font-size: 2em;
+    }
+  
+    .inputs {
+      flex-direction: column; /* Empilha os inputs em telas menores */
+    }
+  
+    .inputs input[type="text"],
+    .inputs input[type="date"],
+    #button-addtodo {
+      width: 100%; /* Fazem os inputs e botão ocuparem a largura total */
+      margin-bottom: 10px; /* Adiciona margem entre eles quando empilhados */
+    }
+  
+    #button-addtodo {
+      padding: 12px; /* Aumenta padding para melhor toque */
+    }
+  
+    li {
+      flex-direction: column; /* Empilha informações e ações da tarefa */
+      align-items: flex-start; /* Alinha à esquerda */
+    }
+  
+    .todo-info {
+      margin-bottom: 10px; /* Espaço entre info e ações */
+      width: 100%; /* Ocupa toda a largura */
+    }
+  
+    .todo-actions {
+      width: 100%; /* Ocupa toda a largura */
+      display: flex;
+      justify-content: flex-start; /* Alinha botões à esquerda */
+    }
+  
+    .todo-actions button {
+      flex-grow: 1; /* Botões ocupam espaço igual */
+    }
+     .todo-actions button:not(:last-child) {
+      margin-right: 8px; /* Adiciona margem direita a todos exceto o último */
+      margin-left: 0;
+    }
+  }

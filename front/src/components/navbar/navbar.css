@@ -1,23 +1,43 @@
+.navbar-body{
+background-color: rgb(1, 255, 170);
+height: 5vh;
+width: 100vw;
+display: flex;
+align-items: center;
+}
+.navbar{
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 
-.navbar {
-    background-color: #222;
-    padding: 1rem;
- 
-  }
-  
-  .ulbar {
-    list-style: none;
-    display: flex;
-    justify-content: right;
-    gap: 1rem;
-  }
-  
-  .ulbar li a {
-    color: #fff;
-    text-decoration: none;
-  }
-  
-  .ulbar li a:hover {
-    text-decoration: underline;
-  }
+}
+.ulbar{
+  width: 400px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+
+}
+.lista a{
+  padding: 5px 10px;
+  text-decoration: none;
+  color: rgb(124, 124, 124);
+  transition: color .3s ease;
+}
+.lista a:hover {
+  color: rgb(39, 39, 39);
+}
+#change-theme{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: .3s;
+}
+#change-theme:hover {
+  transform: scale(1.1);
+}
+
   
