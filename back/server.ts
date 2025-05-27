@@ -44,7 +44,7 @@ mongoose.connect(process.env.MONGO_URI)
     const port = process.env.PORT ?? 5000;
     //Determina a porta em que o servidor irá escutar.
     app.listen(port, () => {
-      console.log(`Servidor rodand ${port}`);
+      console.log(`Servidor rodando na porta: ${port}`);
     });
     //Inicia o servidor Express para escutar por requisições HTTP na porta especificada e exibe uma mensagem para indicar a porta em que esta rodando
   })

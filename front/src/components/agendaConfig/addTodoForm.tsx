@@ -17,9 +17,13 @@ import { IoIosAdd } from "react-icons/io";
     const handleSubmit = async (e: React.FormEvent) => {
       e.preventDefault(); // Prevenir o comportamento padrão do formulário
       if (newTodoTitle.trim() && newTodoDuedate) {
+        try{
         await onAddTodo(newTodoTitle, newTodoDuedate);
         setNewTodoTitle("");
         setNewTodoDuedate("");
+        } catch(error){
+          console.error("Erro ao adicionar tarefa", error)
+        }
       } else {
         // Adicionar alguma lógica de feedback para o usuário se os campos estiverem vazios
         console.warn("Título e data de vencimento são obrigatórios.");

@@ -2,42 +2,40 @@ import { Request, Response, RequestHandler, NextFunction } from 'express';
 import Todo from '../models/todo';
 import { ParamsDictionary } from 'express-serve-static-core';
 import { ParsedQs } from 'qs';
+import { handleErrorResponse } from '../utils/erroUtils'
 
 export const getTodos: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const todos = await Todo.find();
     res.json(todos);
   } catch (error) {
-    console.error('Erro ao buscar tarefas:', error);
-    res.status(500).json({ error: 'Erro ao buscar tarefas' });
+    handleErrorResponse(res, error, 'Erro ao listar tarefa')
   }
 };
 
-export const createTodo: RequestHandler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
+interface NewTodoBody{
+  title:string
+  duedate?: Date
+}
+export const createTodo: RequestHandler <ParamsDictionary, any, NewTodoBody, ParsedQs,Record<string, any> > = async (req, res, next
 ) => {
   try {
     const { title, duedate } = req.body;
     const newTodo = new Todo({ title, duedate });
     const savedTodo = await newTodo.save();
-    res.json(savedTodo);
+    res.status(201).json(savedTodo);
     console.log("Corpo da requisição recebido no backend:", req.body);
   } catch (error) {
-    console.error('Erro ao salvar tarefa:', error);
-    res.status(500).json({ error: 'Erro interno ao salvar tarefa' });
-    
+    handleErrorResponse(res, error, 'Erro ao criar tarefa')
   }
 };
 
-export const updateTodo: RequestHandler<
-  ParamsDictionary,
-  any,
-  { title?: string; completed?: boolean; duedate?: Date },
-  ParsedQs,
-  Record<string, any>
-> = async (req: Request<ParamsDictionary>, res: Response, next: NextFunction) => {
+interface UpdateTodoBody{
+  title?: string
+  completed?: boolean
+  duedate?: Date
+}
+export const updateTodo: RequestHandler< ParamsDictionary,any,UpdateTodoBody,ParsedQs, Record<string, any> > = async (req, res, next) => {
   try {
     const { title, completed } = req.body;
     const updatedTodo = await Todo.findByIdAndUpdate(
@@ -47,15 +45,16 @@ export const updateTodo: RequestHandler<
     );
 
     if (!updatedTodo) {
-      return res.status(404).json({ error: 'Tarefa não encontrada' });
+      res.status(404).json({ error: 'Tarefa não encontrada' });
+      return
     }
 
     res.json(updatedTodo);
   } catch (error) {
-    console.error('Erro ao atualizar tarefa:', error);
-    res.status(500).json({ error: 'Erro interno ao atualizar tarefa' });
+    handleErrorResponse(res, error, 'Erro ao atualizar tarefa tarefa')
   }
 };
+
 
 export const deleteTodo: RequestHandler<
   ParamsDictionary,
@@ -68,12 +67,12 @@ export const deleteTodo: RequestHandler<
     const deletedTodo = await Todo.findByIdAndDelete(req.params.id);
 
     if (!deletedTodo) {
-      return res.status(404).json({ error: 'Tarefa não encontrada' });
+      res.status(404).json({ error: 'Tarefa não encontrada' });
+      return
     }
 
     res.json({ message: 'Tarefa removida' });
   } catch (error) {
-    console.error('Erro ao deletar tarefa:', error);
-    res.status(500).json({ error: 'Erro interno ao deletar tarefa' });
+    handleErrorResponse(res, error, 'Erro ao deletar tarefa')
   }
 };
